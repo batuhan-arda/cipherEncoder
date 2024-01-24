@@ -3,20 +3,42 @@
 using namespace std;
 
 //by Can Sarı , Batuhan Arda Bekar
+void Decrypt(int a, int b, int* m, int* n)
+{
+	while ((a * (*m) - 1) % 26 != 0)
+		++*m;
+	while ((a * (*n) + b) % 26 != 0)
+		++*n;
+}
+
 int main()
 {
-	int a, b; // f(p) = a.p + b
+	int a = 0, b = 0; // f(p) = a.p + b
+	int m = 0, n = 0; // f^-1(p) = m.p + n
+
+	string text;
+
+	cout << "Decrypt Or Encrypt? (D / E) :";
+	cin >> text;
 
 	cout << "Enter a [ f(p) = a.p + b ] :";
 	cin >> a;
 	cout << "Enter b [ f(p) = a.p + b ] :";
 	cin >> b;
 
-	string text;
+	if (text == "D")
+	{
+		Decrypt(a, b, &m, &n);
+		a = m;
+		b = n;
+	}
+	
+
 	cout << "Enter Text: ";
 	cin >> text;
 
 	cout << '\n';
+
 	char alphabetIndex[26];
 	char cipherIndex[26];
 
